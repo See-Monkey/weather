@@ -1,3 +1,9 @@
+import weather from "../js/weather.js";
+import { format, addDays } from "date-fns";
+
+const Weather = new weather();
+let forecast = {};
+
 export default class Display {
     constructor() {
         this.settingsToggle = 0;
@@ -39,6 +45,7 @@ export default class Display {
     tempF() {
         const settingTempBtn = document.querySelector("#settingTempBtn");
         settingTempBtn.classList.remove("active");
+        settingTempBtn.style.back
 
         this.tempToggle = 0;
     }
@@ -94,7 +101,26 @@ export default class Display {
         this.modeToggle = 1;
     }
 
-    search() {
+    convertC(input) {
+        const output = (input - 32) * 5 / 9;
+        return Math.round(output * 10) / 10;
+    }
 
+    convertKm(input) {
+        const output = input * 1.60934;
+        return Math.round(output * 10) / 10;
+    }
+
+    async search() {
+        const searchInput = document.querySelector("#searchInput");
+        const today = new Date();
+        const nextWeek = addDays(today, 7);
+        console.log(today);
+        forecast = await Weather.fetchWeather(searchInput.value, format(today, "yyyy-MM-dd"), format(nextWeek, "yyyy-MM-dd"));
+        console.log(forecast);
+        console.log(forecast.currentConditions.temp);
+        console.log(this.convertC(forecast.currentConditions.temp));
     }
 }
+
+// =============== testing =============== //

@@ -79,7 +79,7 @@ header {
 
 .settings {
   display: flex;
-  gap: 40px;
+  gap: 35px;
 }
 
 .gearIcon {
@@ -101,6 +101,7 @@ header {
   flex-direction: column;
   align-items: center;
   gap: 4px;
+  width: 70px;
 }
 
 .settingText {
