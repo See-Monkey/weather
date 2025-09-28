@@ -1,25 +1,28 @@
 console.log("Hi, Mom!");
 
 import "../css/style.css";
+import disp from "../js/display.js";
+
+const Display = new disp();
 
 document.addEventListener("click", (e) => {
     let target = e.target;
     
     switch(target.id) {
         case "settingsBtn":
-            console.log("settings button clicked");
+            Display.toggleSettings();
             break;
         case "settingTempBtn":
-            console.log("temperature toggle clicked");
+            Display.toggleTemp();
             break;
         case "settingSpeedBtn":
-            console.log("speed toggle clicked");
+            Display.toggleSpeed();
             break;
         case "settingModeBtn":
-            console.log("mode toggle clicked");
+            Display.toggleMode();
             break;
         case "searchBtn":
-            console.log("search button clicked");
+            Display.search()
             break;
     }
 });

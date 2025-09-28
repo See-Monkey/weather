@@ -87,9 +87,9 @@ header {
 }
 
 #settingsBtn {
-  height: 50px;
-  width: 50px;
-  border-radius: 25px;
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
   background-image: url("../img/cog.svg");
   background-position: center;
   background-repeat: no-repeat;
@@ -127,6 +127,10 @@ header {
   background-position: center;
   background-repeat: no-repeat;
   background-size: 50px 50px;
+}
+
+.settingToggle.active {
+  background-image: url("../img/toggle-switch.svg");
 }
 
 #settingTempBtn {
@@ -176,6 +180,7 @@ nav {
   height: 40px;
   border-radius: 20px;
   flex: 1;
+  padding: 0 20px;
 }
 
 #searchBtn {
@@ -185,7 +190,8 @@ nav {
   background-image: url("../img/magnify.svg");
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 32px 32px;
+  background-size: 30px 30px;
+  flex-shrink: 0;
 }
 
 /* ============ current ============ */
@@ -203,10 +209,15 @@ header {
   display: flex;
   align-self: stretch;
   justify-content: space-between;
+  align-items: flex-end;
 }
 .gearIcon {
   display: grid;
   place-items: center;
+}
+
+.settings.disabled {
+  display: none;
 }
 
 /* ============ mobile nav ============ */
