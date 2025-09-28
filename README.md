@@ -1,2 +1,3 @@
-# todo
-The Odin Project - Javascript - To Do List
+# weather app
+The Odin Project - Weather App
+Asynchronous Javascript and APIs
