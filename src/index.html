@@ -7,41 +7,43 @@
 </head>
 <body>
     <header>
-        <div class="logo">
-            <div class="logoImg"></div>
-            <h1 class="logoText">Blue Skies</h1>
-        </div>
-        <div class="settings">
+        <div class="mobileHeader">
+            <div class="logo">
+                <div class="logoImg"></div>
+                <h1 class="logoText">Blue Skies</h1>
+            </div>
             <div class="gearIcon">
-                <button id="settingBtn" type="button"></button>
+                <button id="settingsBtn" type="button"></button>
             </div>
+        </div>
+        <div class="settings"> 
             <div class="setting">
                 <div class="settingText">
-                    <p>F</p>
-                    <p>C</p>
+                    <p>&deg;F</p>
+                    <p>&deg;C</p>
                 </div>
-                <button id="settingTemp" type="button"></button>
+                <button id="settingTempBtn" class="settingToggle" type="button"></button>
             </div>
             <div class="setting">
                 <div class="settingText">
-                    <p>mph</p>
-                    <p>km/h</p>
+                    <p>mi</p>
+                    <p>km</p>
                 </div>
-                <button id="settingTemp" type="button"></button>
+                <button id="settingSpeedBtn" class="settingToggle" type="button"></button>
             </div>
             <div class="setting">
-                <div class="settingText">
+                <div class="settingText mode">
                     <div class="lightMode"></div>
                     <div class="darkMode"></div>
                 </div>
-                <button id="settingTemp" type="button"></button>
+                <button id="settingModeBtn" class="settingToggle" type="button"></button>
             </div>
         </div>
     </header>
     <nav>
-        <form action="#" method="post">
-            <input type="text" id="searchInput">
-            <button class="searchBtn" type="button"></button>
+        <form class="searchForm" action="#" method="post">
+            <input id="searchInput" type="text">
+            <button id="searchBtn" type="button"></button>
         </form>
     </nav>
     <section class="current">

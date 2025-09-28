@@ -40,18 +40,179 @@ h1, h2, h3, h4, h5, h6 {
   
 }
 
+body {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+}
+
 /* ============ header ============ */
+header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 10px 20px;
+}
+
+.logo {
+  display: flex;
+  gap: 10px;
+}
+
+.logoImg {
+  width: 50px;
+  height: 50px;
+  background-image: url("../img/parachute.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 50px 50px;
+  filter: drop-shadow(2px 2px 4px gray);
+}
+
+.logoText {
+  height: 40px;
+  font-size: 40px;
+}
+
+.settings {
+  display: flex;
+  gap: 40px;
+}
+
+.gearIcon {
+  display: none;
+}
+
+#settingsBtn {
+  height: 50px;
+  width: 50px;
+  border-radius: 25px;
+  background-image: url("../img/cog.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+}
+
+.setting {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.settingText {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 25px;
+  width: 60px;
+}
+
+.settingText.mode {
+  width: 70px;
+}
+
+.settingText p {
+  font-size: 14px;
+}
+
+.settingToggle {
+  height: 30px;
+  width: 52px;
+  border-radius: 15px;
+  background-image: url("../img/toggle-switch-off.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 50px 50px;
+}
+
+#settingTempBtn {
+
+}
+
+#settingSpeedBtn {
+
+}
+
+#settingModeBtn {
+
+}
+
+.lightMode {
+  height: 25px;
+  width: 25px;
+  background-image: url("../img/weather-sunny.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 22px 22px;
+}
+
+.darkMode {
+  height: 25px;
+  width: 25px;
+  background-image: url("../img/weather-night.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 22px 22px;
+}
 
 /* ============ nav ============ */
+nav {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.searchForm {
+  width: 60%;
+  display: flex;
+  gap: 10px;
+}
+
+#searchInput {
+  height: 40px;
+  border-radius: 20px;
+  flex: 1;
+}
+
+#searchBtn {
+  height: 40px;
+  width: 40px;
+  border-radius: 20px;
+  background-image: url("../img/magnify.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 32px 32px;
+}
 
 /* ============ current ============ */
 
 /* ============ future ============ */
 
+@media (max-width: 650px) {
 /* ============ mobile header ============ */
+header {
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+.mobileHeader {
+  display: flex;
+  align-self: stretch;
+  justify-content: space-between;
+}
+.gearIcon {
+  display: grid;
+  place-items: center;
+}
 
 /* ============ mobile nav ============ */
 
 /* ============ mobile current ============ */
 
 /* ============ mobile future ============ */
+
+}
