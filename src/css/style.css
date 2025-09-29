@@ -50,6 +50,7 @@ h1, h2, h3, h4, h5, h6 {
 
 body {
   width: 100vw;
+  overflow-x: hidden;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -176,6 +177,7 @@ nav {
 
 #searchInput {
   height: 40px;
+  width: calc(100% - 40px);
   border-radius: 20px;
   flex: 1;
   padding: 0 20px;
@@ -195,9 +197,11 @@ nav {
 /* ============ loading ============ */
 .content {
   flex: 1;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 20px;
 }
 
 .loadingCard {
@@ -208,6 +212,236 @@ nav {
 }
 
 /* ============ current ============ */
+.current {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.title {
+  white-space: nowrap;
+}
+
+.value {
+
+}
+
+.unit {
+
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 12px;
+  background-color: gray;
+}
+
+.containerCol {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4px;
+  border-radius: 6px;
+  background-color: silver;
+}
+
+.valueHolder {
+  display: flex;
+  gap: 4px;
+}
+
+.currentHeader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 60px;
+  row-gap: 10px;
+  flex-wrap: wrap;
+  padding-bottom: 20px;
+  border-bottom: 2px solid gray;
+  margin-bottom: 40px;
+}
+
+.currentHeaderMain {
+
+}
+
+.resolvedAddress {
+
+}
+
+.forecastDescription {
+
+}
+
+.latLonIcon {
+  height: 35px;
+  width: 35px;
+  background-image: url("../img/web.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+}
+
+.currentDate {
+
+}
+
+.date {
+
+}
+
+.currentDescription {
+
+}
+
+.tempContainer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 12px;
+  background-color: gray;
+}
+
+.currentTemp {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.tempMaxMin {
+  display: flex;
+  gap: 10px;
+}
+
+.tempIcon {
+  height: 35px;
+  width: 35px;
+  background-image: url("../img/thermometer.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+}
+
+.precipIcon {
+  height: 35px;
+  width: 35px;
+  background-image: url("../img/weather-snowy-rainy.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+}
+
+.precipRainIcon {
+  height: 35px;
+  width: 35px;
+  background-image: url("../img/weather-rainy.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+}
+
+.precipSnowIcon {
+  height: 35px;
+  width: 35px;
+  background-image: url("../img/weather-snowy.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+}
+
+.cloudCoverIcon {
+  height: 35px;
+  width: 35px;
+  background-image: url("../img/cloud-percent-outline.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+}
+
+.humidityIcon {
+  height: 35px;
+  width: 35px;
+  background-image: url("../img/waves-arrow-up.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+}
+
+.dewIcon {
+  height: 35px;
+  width: 35px;
+  background-image: url("../img/thermometer-water.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+}
+
+.visibilityIcon {
+  height: 35px;
+  width: 35px;
+  background-image: url("../img/eye-outline.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+}
+
+.UVindexIcon {
+  height: 35px;
+  width: 35px;
+  background-image: url("../img/weather-sunny-alert.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+}
+
+.windIcon {
+  height: 35px;
+  width: 35px;
+  background-image: url("../img/weather-windy.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+}
+
+.windDirArrow {
+
+}
+
+.sunriseIcon {
+  height: 35px;
+  width: 35px;
+  background-image: url("../img/weather-sunset-up.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+}
+
+.sunsetIcon {
+  height: 35px;
+  width: 35px;
+  background-image: url("../img/weather-sunset-down.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+}
+
+.currentMoonIcon {
+  height: 35px;
+  width: 35px;
+  background-image: url("../img/moon-waning-crescent.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+}
 
 /* ============ upcoming ============ */
 
