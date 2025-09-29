@@ -10,6 +10,7 @@ export default class Display {
         this.tempToggle = 0;
         this.speedToggle = 0;
         this.modeToggle = 0;
+        this.displayType = "empty";
     }
 
     toggleSettings() {
@@ -40,6 +41,7 @@ export default class Display {
         } else {
             this.tempF();
         }
+        this.refresh();
     }
 
     tempF() {
@@ -63,6 +65,7 @@ export default class Display {
         } else {
             this.speedMi();
         }
+        this.refresh();
     }
 
     speedMi() {
@@ -111,16 +114,92 @@ export default class Display {
         return Math.round(output * 10) / 10;
     }
 
+    convertCm(input) {
+        const output = input * 2.54;
+        return Math.round(output * 10) / 10;
+    }
+
     async search() {
         const searchInput = document.querySelector("#searchInput");
+        this.loading(searchInput.value);
         const today = new Date();
         const nextWeek = addDays(today, 7);
-        console.log(today);
+
         forecast = await Weather.fetchWeather(searchInput.value, format(today, "yyyy-MM-dd"), format(nextWeek, "yyyy-MM-dd"));
+        
+        await this.delay(2000);
+        this.redrawOverview();
         console.log(forecast);
         console.log(forecast.currentConditions.temp);
         console.log(this.convertC(forecast.currentConditions.temp));
     }
+
+    delay(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+
+    loading(searchTerm) {
+        const content = document.querySelector(".content");
+        content.innerHTML = "";
+
+        const loadingCard = document.createElement("div");
+        loadingCard.classList.add("loadingCard");
+        
+        const loadingHeader = document.createElement("h2");
+        loadingHeader.classList.add("loadingHeader");
+        loadingHeader.textContent = "Loading ...";
+        loadingCard.appendChild(loadingHeader);
+
+        const loadingDesc = document.createElement("h3");
+        loadingDesc.classList.add("loadingDesc");
+        loadingDesc.textContent = `Fetching forecast for ${searchTerm}`;
+        loadingCard.appendChild(loadingDesc);
+
+        content.appendChild(loadingCard);
+    }
+
+    refresh() {
+        if (this.displayType === "empty") {
+            return;
+        } else if (this.displayType === "overview") {
+            this.redrawOverview();
+        } else if (this.displayType === "future") {
+            this.redrawFuture();
+        }
+    }
+
+    redrawOverview() {
+        this.displayType = "overview";
+        const content = document.querySelector(".content");
+        content.innerHTML = "";
+
+        // current
+        const current = document.createElement("section");
+        current.classList.add("current")
+
+
+        // upcoming
+        const upcoming = document.createElement("section");
+        upcoming.classList.add("upcoming")
+
+
+        content.appendChild(current);
+        content.appendChild(upcoming);
+    }
+
+    redrawFuture(index) {
+        this.displayType = "future";
+        const content = document.querySelector(".content");
+        content.innerHTML = "";
+
+        // future
+        const future = document.createElement("section");
+        future.classList.add("future");
+
+
+        content.appendChild(future);
+    }
 }
 
 // =============== testing =============== //
+
