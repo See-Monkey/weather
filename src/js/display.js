@@ -202,4 +202,7 @@ export default class Display {
 }
 
 // =============== testing =============== //
-
+const today = new Date();
+const nextWeek = addDays(today, 7);
+forecast = Weather.fetchWeather("salt lake city, ut", format(today, "yyyy-MM-dd"), format(nextWeek, "yyyy-MM-dd"));
+console.log(forecast);

@@ -15,4 +15,18 @@ export default class Weather {
             console.error("Error fetching data: ", error);
         }
     }
+
+    getIconURL(condition) {
+        let url = "";
+
+        return url;
+    }
+
+    getWindDir() {
+
+    }
+
+    getMoonPhase() {
+        
+    }
 }
