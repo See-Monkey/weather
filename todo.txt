@@ -1,10 +1,11 @@
-add dummy HTML for current weather
+style current weather
 add dummy HTML for upcoming weather
-create function to determine weather icon url
-style current / upcoming
+style upcoming weather
 format current / upcoming into redrawOverview with real data
 style Overview for mobile
 add event handling to click on future dates
 add redrawFuture function
+style Future for mobile
 add light / dark mode styling
 add in any alerts received from API
+refine function to determine weather icon url

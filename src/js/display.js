@@ -126,7 +126,7 @@ export default class Display {
         const nextWeek = addDays(today, 7);
 
         forecast = await Weather.fetchWeather(searchInput.value, format(today, "yyyy-MM-dd"), format(nextWeek, "yyyy-MM-dd"));
-        
+        console.log(Weather.getWindDir(forecast.currentConditions.winddir));
         await this.delay(2000);
         this.redrawOverview();
         console.log(forecast);
@@ -206,3 +206,4 @@ const today = new Date();
 const nextWeek = addDays(today, 7);
 forecast = Weather.fetchWeather("salt lake city, ut", format(today, "yyyy-MM-dd"), format(nextWeek, "yyyy-MM-dd"));
 console.log(forecast);
+

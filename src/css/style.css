@@ -37,7 +37,15 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ============ global ============ */
 :root {
-  
+  --black: #121217;
+  --d-gray: #30343f;
+  --gray: #95979f;
+  --silver: #c8c9cf;
+  --white: #fafaff;
+  --l-blue: #bad6ff;
+  --blue: #96aeda;
+  --d-blue: #273469;
+  --navy: #1e2749;
 }
 
 body {
@@ -133,18 +141,6 @@ header {
 
 .settingToggle.active {
   background-image: url("../img/toggle-switch.svg");
-}
-
-#settingTempBtn {
-
-}
-
-#settingSpeedBtn {
-
-}
-
-#settingModeBtn {
-
 }
 
 .lightMode {
