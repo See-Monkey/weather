@@ -223,16 +223,18 @@ export default class Display {
         const containerWrap1 = this.createElement('div', 'containerWrap');
         const currentDate = this.createElement('div', 'currentDate');
         const today = new Date();
-        const date = this.createElement('h3', 'date', format((today), "EEEE, 'the' do 'of' MMMM, yyyy"));
+        const date = this.createElement('h3', 'date', format((today), "EEEE, MMMM do, yyyy"));
         const currentDescription = this.createElement('h4', 'currentDescription', forecast.days[0].description);
 
         currentDate.appendChild(date);
         currentDate.appendChild(currentDescription);
 
         const currentConditionIcon = this.createElement('div', 'currentConditionIcon');
+        currentConditionIcon.classList.add(Weather.getConditionIcon(forecast.currentConditions.icon))
 
         const tempContainer = this.createElement('div', 'tempContainer');
         const tempIcon = this.createElement('div', 'tempIcon');
+        tempIcon.classList.add(Weather.getTempIcon(forecast.currentConditions.temp));
 
         const currentTemp = this.createElement('div', 'currentTemp');
         const valueHolderMain = this.createElement('div', 'valueHolder');
@@ -282,6 +284,7 @@ export default class Display {
         tempMaxMin.appendChild(lowCol);
 
         tempContainer.appendChild(tempIcon);
+
         tempContainer.appendChild(currentTemp);
         tempContainer.appendChild(tempMaxMin);
 
@@ -389,11 +392,12 @@ export default class Display {
         const windIcon = this.createElement('div', 'windIcon');
         const fromCol = this.createElement('div', 'containerCol');
         const fromTitle = this.createElement('h4', 'title', 'From');
-        const fromValue = this.createElement('p', 'value', 'W');
+        const fromValue = this.createElement('p', 'value', Weather.getWindDir(forecast.currentConditions.winddir));
         fromCol.appendChild(fromTitle);
         fromCol.appendChild(fromValue);
 
         const windDirArrow = this.createElement('div', 'windDirArrow');
+        windDirArrow.classList.add(Weather.getWindDirIcon(Weather.getWindDir(forecast.currentConditions.winddir)));
 
         const speedCol = this.createElement('div', 'containerCol');
         const speedTitle = this.createElement('h4', 'title', 'Speed');
@@ -483,7 +487,7 @@ export default class Display {
         // Moon
         const moonContainer = this.createElement('div', 'container');
         const moonIcon = this.createElement('div', 'currentMoonIcon');
-        moonIcon.classList.add(Weather.getMoonIconURL(Weather.getMoonPhase(forecast.currentConditions.moonphase)));
+        moonIcon.classList.add(Weather.getMoonIcon(Weather.getMoonPhase(forecast.currentConditions.moonphase)));
         const moonCol = this.createElement('div', 'containerCol');
         const moonTitle = this.createElement('h4', 'title', 'Moon Phase');
         const moonValue = this.createElement('p', 'value', Weather.getMoonPhase(forecast.currentConditions.moonphase));

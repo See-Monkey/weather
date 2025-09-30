@@ -1,6 +1,6 @@
 export default class Weather {
     constructor() {
-        this.key = "XKRBNZLRBQGFV45CMGN3Z9FZX";
+        this.key = "HKRBNZLRBQGFV45CMGN3Z9FZS";
     }
 
     async fetchWeather(searchLocation, start, end) {
@@ -60,7 +60,7 @@ export default class Weather {
         }
     }
 
-    getConditionIconURL(condition) {
+    getConditionIcon(condition) {
         switch (condition) {
             case "snow":
                 return "weather-snowy";
@@ -73,7 +73,7 @@ export default class Weather {
             case "cloudy":
                 return "weather-cloudy";
             case "partly-cloudy-day":
-                return".eather-partly-cloudy";
+                return"weather-partly-cloudy";
             case "partly-cloudy-night":
                 return "weather-night-partly-cloudy";
             case "clear-day":
@@ -85,7 +85,7 @@ export default class Weather {
         }
     }
 
-    getTempIconURL(temp) {
+    getTempIcon(temp) {
         if (temp < 37) {
             return "thermometer-low";
         } else if (temp < 80) {
@@ -95,30 +95,30 @@ export default class Weather {
         }
     }
 
-    getWindDirIconURL(dir) {
+    getWindDirIcon(dir) {
         switch (dir) {
             case "N":
-                return "arrow-down-thin";
+                return "arrow-down";
             case "NE":
-                return "arrow-bottom-left-thin";
+                return "arrow-bottom-left";
             case "E":
-                return "arrow-left-thin";
+                return "arrow-left";
             case "SE":
-                return "arrow-top-left-thin";
+                return "arrow-top-left";
             case "S":
-                return "arrow-up-thin";
+                return "arrow-up";
             case "SW":
-                return "arrow-top-right-thin";
+                return "arrow-top-right";
             case "W":
-                return "arrow-right-thin";
+                return "arrow-right";
             case "NW":
-                return "arrow-bottom-right-thin";
+                return "arrow-bottom-right";
             default:
                 return "alert-circle-outline";
         }
     }
 
-    getMoonIconURL(phase) {
+    getMoonIcon(phase) {
         switch (phase) {
             case "New Moon":
                 return "moon-new";

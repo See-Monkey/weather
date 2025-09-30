@@ -203,6 +203,7 @@ nav {
   justify-content: center;
   align-items: center;
   padding: 10px;
+  overflow-x: hidden;
 }
 
 .loadingCard {
@@ -334,10 +335,37 @@ nav {
 .currentConditionIcon {
   height: 120px;
   width: 120px;
-  background-image: url("../img/weather-cloudy.svg");
+  /* background-image: url("../img/weather-cloudy.svg"); */
   background-position: center;
   background-repeat: no-repeat;
   background-size: 120px 120px;
+}
+.weather-snowy {
+  background-image: url("../img/weather-snowy.svg");
+}
+.weather-rainy {
+  background-image: url("../img/weather-rainy.svg");
+}
+.weather-fog {
+  background-image: url("../img/weather-fog.svg");
+}
+.weather-windy {
+  background-image: url("../img/weather-windy.svg");
+}
+.weather-cloudy {
+  background-image: url("../img/weather-cloudy.svg");
+}
+.weather-partly-cloudy {
+  background-image: url("../img/weather-partly-cloudy.svg");
+}
+.weather-night-partly-cloudy {
+  background-image: url("../img/weather-night-partly-cloudy.svg");
+}
+.weather-sunny {
+  background-image: url("../img/weather-sunny.svg");
+}
+.weather-night {
+  background-image: url("../img/weather-night.svg");
 }
 
 .tempContainer {
@@ -351,7 +379,7 @@ nav {
 .currentTemp {
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 22px;
 }
 
 .currentTempValue {
@@ -364,12 +392,21 @@ nav {
 }
 
 .tempIcon {
-  height: 45px;
-  width: 45px;
-  background-image: url("../img/thermometer.svg");
+  height: 40px;
+  width: 40px;
+  /* background-image: url("../img/thermometer.svg"); */
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 50px 50px;
+  background-size: 40px 40px;
+}
+.thermometer-low {
+  background-image: url("../img/thermometer-low.svg");
+}
+.thermometer {
+  background-image: url("../img/thermometer.svg");
+}
+.thermometer-high {
+  background-image: url("../img/thermometer-high.svg");
 }
 
 .precipIcon {
@@ -456,10 +493,34 @@ nav {
 .windDirArrow {
   height: 30px;
   width: 30px;
-  background-image: url("../img/arrow-up-thin.svg");
+  /* background-image: url("../img/arrow-up-thin.svg"); */
   background-position: center;
   background-repeat: no-repeat;
   background-size: 30px 30px;
+}
+.arrow-down {
+  background-image: url("../img/arrow-down-thin.svg");
+}
+.arrow-bottom-left {
+  background-image: url("../img/arrow-bottom-left-thin.svg");
+}
+.arrow-left {
+  background-image: url("../img/arrow-left-thin.svg");
+}
+.arrow-top-left {
+  background-image: url("../img/arrow-top-left-thin.svg");
+}
+.arrow-up {
+  background-image: url("../img/arrow-up-thin.svg");
+}
+.arrow-top-right {
+  background-image: url("../img/arrow-top-right-thin.svg");
+}
+.arrow-right {
+  background-image: url("../img/arrow-right-thin.svg");
+}
+.arrow-bottom-right {
+  background-image: url("../img/arrow-bottom-right-thin.svg");
 }
 
 .sunriseIcon {
@@ -545,7 +606,7 @@ header {
 
 /* ============ mobile current ============ */
 .container {
-  width: calc(100% - 50px);
+  width: calc(100% - 40px);
   justify-content: center;
 }
 
@@ -554,7 +615,7 @@ header {
 }
 
 .tempContainer {
-  width: calc(100% - 50px);
+  width: calc(100% - 40px);
   justify-content: center;
 }
 

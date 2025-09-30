@@ -26,3 +26,11 @@ document.addEventListener("click", (e) => {
             break;
     }
 });
+
+const form = document.querySelector(".searchForm");
+form.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+        e.preventDefault();
+        Display.search()
+    }
+});

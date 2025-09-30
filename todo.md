@@ -1,4 +1,4 @@
-add css classes for condition, thermometer, and wind direction
+conditional rain, snow, gust
 add dummy HTML for upcoming weather
 style upcoming weather
 format upcoming into redrawOverview with real data
