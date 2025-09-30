@@ -1,6 +1,6 @@
 export default class Weather {
     constructor() {
-        this.key = "HKRBNZLRBQGFV45CMGN3Z9FZS";
+        this.key = "XKRBNZLRBQGFV45CMGN3Z9FZX";
     }
 
     async fetchWeather(searchLocation, start, end) {
@@ -63,58 +63,81 @@ export default class Weather {
     getConditionIconURL(condition) {
         switch (condition) {
             case "snow":
-                return "../img/weather-snowy.svg";
+                return "weather-snowy";
             case "rain":
-                return "../img/weather-rainy.svg";
+                return "weather-rainy";
             case "fog":
-                return "../img/weather-fog.svg";
+                return "weather-fog";
             case "wind":
-                return "../img/weather-windy.svg";
+                return "weather-windy";
             case "cloudy":
-                return "../img/weather-cloudy.svg";
+                return "weather-cloudy";
             case "partly-cloudy-day":
-                return"../img/weather-partly-cloudy.svg";
+                return".eather-partly-cloudy";
             case "partly-cloudy-night":
-                return "../img/weather-night-partly-cloudy.svg";
+                return "weather-night-partly-cloudy";
             case "clear-day":
-                return "../img/weather-sunny.svg";
+                return "weather-sunny";
             case "clear-night":
-                return "../img/weather-night.svg";
+                return "weather-night";
             default:
-                return "../img/alert-circle-outline.svg";
+                return "alert-circle-outline";
         }
     }
 
     getTempIconURL(temp) {
         if (temp < 37) {
-            return "../img/thermometer-low.svg";
+            return "thermometer-low";
         } else if (temp < 80) {
-            return "../img/thermometer.svg";
+            return "thermometer";
         } else {
-            return "../img/thermometer-high.svg";
+            return "thermometer-high";
+        }
+    }
+
+    getWindDirIconURL(dir) {
+        switch (dir) {
+            case "N":
+                return "arrow-down-thin";
+            case "NE":
+                return "arrow-bottom-left-thin";
+            case "E":
+                return "arrow-left-thin";
+            case "SE":
+                return "arrow-top-left-thin";
+            case "S":
+                return "arrow-up-thin";
+            case "SW":
+                return "arrow-top-right-thin";
+            case "W":
+                return "arrow-right-thin";
+            case "NW":
+                return "arrow-bottom-right-thin";
+            default:
+                return "alert-circle-outline";
         }
     }
 
     getMoonIconURL(phase) {
         switch (phase) {
             case "New Moon":
-                return "../img/moon-new.svg";
+                return "moon-new";
             case "Waxing Crescent":
-                return "../img/moon-waxing-crescent.svg";
+                return "moon-waxing-crescent";
             case "First Quarter":
-                return "../img/moon-first-quarter.svg";
+                return "moon-first-quarter";
             case "Waxing Gibbous":
-                return "../img/moon-waxing-gibbous.svg";
+                return "moon-waxing-gibbous";
             case "Full Moon":
-                return "../img/moon-full.svg";
+                return "moon-full";
             case "Waning Gibbous":
-                return "../img/moon-waning-gibbous.svg";
+                return "moon-waning-gibbous";
             case "Last Quarter":
-                return "../img/moon-last-quarter.svg";
+                return "moon-last-quarter";
             case "Waning Crescent":
-                return "../img/moon-waning-crescent.svg";
+                return "moon-waning-crescent";
             default:
-                return "../img/alert-circle-outline.svg";
+                return "alert-circle-outline";
         }
     }
 }

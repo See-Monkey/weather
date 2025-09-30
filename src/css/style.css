@@ -170,7 +170,7 @@ nav {
 }
 
 .searchForm {
-  width: 60%;
+  width: min(60%, 1000px);
   display: flex;
   gap: 10px;
 }
@@ -201,7 +201,8 @@ nav {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 20px;
+  align-items: center;
+  padding: 10px;
 }
 
 .loadingCard {
@@ -213,12 +214,15 @@ nav {
 
 /* ============ current ============ */
 .current {
-  width: 100%;
+  width: min(100%, 900px);
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 10px;
+  padding: 20px 0;
+  border-radius: 20px;
+  background-color: silver;
 }
 
 .title {
@@ -239,7 +243,6 @@ nav {
   gap: 10px;
   padding: 10px;
   border-radius: 12px;
-  background-color: gray;
 }
 
 .containerCol {
@@ -247,13 +250,28 @@ nav {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 4px;
+  padding: 4px 6px;
   border-radius: 6px;
-  background-color: silver;
+}
+
+.containerWrap {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  column-gap: 20px;
+  row-gap: 10px;
+}
+
+.containerWrap.precipOpt {
+  justify-content: center;
+  column-gap: 0;
 }
 
 .valueHolder {
   display: flex;
+  align-items: flex-end;
   gap: 4px;
 }
 
@@ -264,13 +282,19 @@ nav {
   column-gap: 60px;
   row-gap: 10px;
   flex-wrap: wrap;
+  margin: 0 10px;
   padding-bottom: 20px;
   border-bottom: 2px solid gray;
   margin-bottom: 40px;
 }
 
 .currentHeaderMain {
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 12px;
 }
 
 .resolvedAddress {
@@ -291,7 +315,12 @@ nav {
 }
 
 .currentDate {
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 12px;
 }
 
 .date {
@@ -302,13 +331,21 @@ nav {
 
 }
 
+.currentConditionIcon {
+  height: 120px;
+  width: 120px;
+  background-image: url("../img/weather-cloudy.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 120px 120px;
+}
+
 .tempContainer {
   display: flex;
   align-items: center;
   gap: 10px;
   padding: 10px;
   border-radius: 12px;
-  background-color: gray;
 }
 
 .currentTemp {
@@ -317,18 +354,22 @@ nav {
   gap: 30px;
 }
 
+.currentTempValue {
+  font-size: 18px;
+}
+
 .tempMaxMin {
   display: flex;
   gap: 10px;
 }
 
 .tempIcon {
-  height: 35px;
-  width: 35px;
+  height: 45px;
+  width: 45px;
   background-image: url("../img/thermometer.svg");
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 30px 30px;
+  background-size: 50px 50px;
 }
 
 .precipIcon {
@@ -413,7 +454,12 @@ nav {
 }
 
 .windDirArrow {
-
+  height: 30px;
+  width: 30px;
+  background-image: url("../img/arrow-up-thin.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
 }
 
 .sunriseIcon {
@@ -437,10 +483,36 @@ nav {
 .currentMoonIcon {
   height: 35px;
   width: 35px;
-  background-image: url("../img/moon-waning-crescent.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: 30px 30px;
+}
+.moon-new {
+  background-image: url("../img/moon-new.svg");
+}
+.moon-waxing-crescent {
+  background-image: url("../img/moon-waxing-crescent.svg");
+}
+.moon-first-quarter {
+  background-image: url("../img/moon-first-quarter.svg");
+}
+.moon-waxing-gibbous {
+  background-image: url("../img/moon-waxing-gibbous.svg");
+}
+.moon-full {
+  background-image: url("../img/moon-full.svg");
+}
+.moon-waning-gibbous {
+  background-image: url("../img/moon-waning-gibbous.svg");
+}
+.moon-last-quarter {
+  background-image: url("../img/moon-last-quarter.svg");
+}
+.moon-waning-crescent {
+  background-image: url("../img/moon-waning-crescent.svg");
+}
+.alert-circle-outline {
+  background-image: url("../img/alert-circle-outline.svg");
 }
 
 /* ============ upcoming ============ */
@@ -472,7 +544,44 @@ header {
 /* ============ mobile nav ============ */
 
 /* ============ mobile current ============ */
+.container {
+  width: calc(100% - 50px);
+  justify-content: center;
+}
 
+.containerWrap {
+  width: 100%;
+}
+
+.tempContainer {
+  width: calc(100% - 50px);
+  justify-content: center;
+}
+
+.title {
+  font-size: .9rem;
+}
+
+.value {
+  font-size: .9rem;
+}
+
+.unit {
+  font-size: .8rem;
+}
+
+.currentTempValue {
+  font-size: 16px;
+}
+
+.tempIcon {
+  height: 40px;
+  width: 40px;
+  background-image: url("../img/thermometer.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 40px 40px;
+}
 /* ============ mobile upcoming ============ */
 
 /* ============ mobile future ============ */
