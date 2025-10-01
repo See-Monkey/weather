@@ -179,9 +179,34 @@ export default class Display {
         const content = document.querySelector(".content");
         content.innerHTML = "";
 
+        this.redrawAlerts();
         this.redrawCurrent();
         this.redrawHourly();
         this.redrawUpcoming();
+    }
+
+    redrawAlerts() {
+        const alerts = forecast.alerts;
+
+        if (alerts.length > 0) {
+            alerts.forEach((weatherAlert) => {
+                const content = document.querySelector(".content");
+                const sectionAlert = this.createElement('section', 'current');
+
+                const alertIcon = this.createElement("div", "alertIcon alert-circle-outline")
+                const currentHeaderMain = this.createElement('div', 'currentHeaderMain');
+                const h2 = this.createElement('h2', 'alertHeadline', weatherAlert.event);
+                const pDesc = this.createElement('p', 'alertDesc', weatherAlert.description);
+
+                currentHeaderMain.appendChild(h2);
+                currentHeaderMain.appendChild(pDesc);
+
+                sectionAlert.appendChild(alertIcon);
+                sectionAlert.appendChild(currentHeaderMain);
+
+                content.appendChild(sectionAlert);
+            });
+        }
     }
 
     redrawCurrent() {
@@ -985,6 +1010,6 @@ export default class Display {
 // =============== testing =============== //
 const today = new Date();
 const nextWeek = addDays(today, 7);
-forecast = Weather.fetchWeather("salt lake city, ut", format(today, "yyyy-MM-dd"), format(nextWeek, "yyyy-MM-dd"));
+forecast = Weather.fetchWeather("Chesapeake Bay, VA", format(today, "yyyy-MM-dd"), format(nextWeek, "yyyy-MM-dd"));
 console.log(forecast);
 

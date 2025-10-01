@@ -215,6 +215,14 @@ nav {
 }
 
 /* ============ current ============ */
+.alertIcon {
+  height: 80px;
+  width: 80px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 80px 80px;
+}
+
 .current {
   width: min(100%, 900px);
   text-align: center;
@@ -336,7 +344,6 @@ nav {
 .currentConditionIcon {
   height: 120px;
   width: 120px;
-  /* background-image: url("../img/weather-cloudy.svg"); */
   background-position: center;
   background-repeat: no-repeat;
   background-size: 120px 120px;
@@ -395,7 +402,6 @@ nav {
 .tempIcon {
   height: 40px;
   width: 40px;
-  /* background-image: url("../img/thermometer.svg"); */
   background-position: center;
   background-repeat: no-repeat;
   background-size: 40px 40px;
@@ -494,7 +500,6 @@ nav {
 .windDirArrow {
   height: 30px;
   width: 30px;
-  /* background-image: url("../img/arrow-up-thin.svg"); */
   background-position: center;
   background-repeat: no-repeat;
   background-size: 30px 30px;
