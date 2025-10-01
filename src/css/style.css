@@ -49,7 +49,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 body {
-  width: 100vw;
+  width: 100%;
   overflow-x: hidden;
   min-height: 100vh;
   display: flex;
@@ -202,6 +202,7 @@ nav {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  gap: 20px;
   padding: 10px;
   overflow-x: hidden;
 }
@@ -439,7 +440,7 @@ nav {
 .cloudCoverIcon {
   height: 35px;
   width: 35px;
-  background-image: url("../img/cloud-percent-outline.svg");
+  background-image: url("../img/weather-cloudy.svg");
   background-position: center;
   background-repeat: no-repeat;
   background-size: 30px 30px;
@@ -577,6 +578,52 @@ nav {
 }
 
 /* ============ upcoming ============ */
+.upcoming {
+  max-width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 10px;
+  border-radius: 20px;
+  background-color: silver;
+}
+
+.upcomingHeader {
+  padding: 10px;
+  border-bottom: 2px solid gray;
+}
+
+.forecastContainer {
+  max-width: 100%;
+  padding: 10px;
+  display: flex;
+  gap: 10px;
+  overflow-x: auto;
+}
+
+.forecastCard {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: gray;
+}
+
+#dateBtn {
+  cursor: pointer;
+}
+
+.upcomingIcon {
+  height: 35px;
+  width: 35px;
+  /* background-image: url("../img/weather-cloudy.svg"); */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+}
 
 /* ============ future ============ */
 
@@ -603,6 +650,9 @@ header {
 }
 
 /* ============ mobile nav ============ */
+.searchForm {
+  width: 70%;
+}
 
 /* ============ mobile current ============ */
 .container {

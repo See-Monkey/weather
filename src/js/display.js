@@ -11,6 +11,7 @@ export default class Display {
         this.speedToggle = 0;
         this.modeToggle = 0;
         this.displayType = "empty";
+        this.dayIndex = 0;
     }
 
     toggleSettings() {
@@ -126,12 +127,9 @@ export default class Display {
         const nextWeek = addDays(today, 7);
 
         forecast = await Weather.fetchWeather(searchInput.value, format(today, "yyyy-MM-dd"), format(nextWeek, "yyyy-MM-dd"));
-        console.log(Weather.getWindDir(forecast.currentConditions.winddir));
         await this.delay(100);
         this.redrawOverview();
-        console.log(forecast);
-        console.log(forecast.currentConditions.temp);
-        console.log(this.convertC(forecast.currentConditions.temp));
+        searchInput.value = "";
     }
 
     delay(ms) {
@@ -177,10 +175,12 @@ export default class Display {
 
     redrawOverview() {
         this.displayType = "overview";
+        this.dayIndex = 0;
         const content = document.querySelector(".content");
         content.innerHTML = "";
 
         this.redrawCurrent();
+        this.redrawHourly();
         this.redrawUpcoming();
     }
 
@@ -238,7 +238,7 @@ export default class Display {
 
         const currentTemp = this.createElement('div', 'currentTemp');
         const valueHolderMain = this.createElement('div', 'valueHolder');
-        const tempValue = this.createElement('h4', 'value currentTempValue', this.tempToggle === 0 ? forecast.currentConditions.temp : this.convertC(forecast.currentConditions.temp));
+        const tempValue = this.createElement('h4', 'value currentTempValue', this.tempToggle === 0 ? Math.trunc(forecast.currentConditions.temp) : this.convertC(forecast.currentConditions.temp));
         const tempUnit = this.createElement('p', 'unit', this.tempToggle === 0 ? '°F' : '°C');
         valueHolderMain.appendChild(tempValue);
         valueHolderMain.appendChild(tempUnit);
@@ -246,7 +246,7 @@ export default class Display {
         const feelCol = this.createElement('div', 'containerCol');
         const feelTitle = this.createElement('h4', 'title', 'Feel');
         const feelValueHolder = this.createElement('div', 'valueHolder');
-        const feelValue = this.createElement('p', 'value', this.tempToggle === 0 ? forecast.currentConditions.feelslike : this.convertC(forecast.currentConditions.feelslike));
+        const feelValue = this.createElement('p', 'value', this.tempToggle === 0 ? Math.trunc(forecast.currentConditions.feelslike) : this.convertC(forecast.currentConditions.feelslike));
         const feelUnit = this.createElement('p', 'unit', this.tempToggle === 0 ? '°F' : '°C');
         feelValueHolder.appendChild(feelValue);
         feelValueHolder.appendChild(feelUnit);
@@ -262,7 +262,7 @@ export default class Display {
         const highCol = this.createElement('div', 'containerCol');
         const highTitle = this.createElement('h4', 'title', 'High');
         const highValueHolder = this.createElement('div', 'valueHolder');
-        const highValue = this.createElement('p', 'value', this.tempToggle === 0 ? forecast.days[0].tempmax : this.convertC(forecast.days[0].tempmax));
+        const highValue = this.createElement('p', 'value', this.tempToggle === 0 ? Math.trunc(forecast.days[0].tempmax) : this.convertC(forecast.days[0].tempmax));
         const highUnit = this.createElement('p', 'unit', this.tempToggle === 0 ? '°F' : '°C');
         highValueHolder.appendChild(highValue);
         highValueHolder.appendChild(highUnit);
@@ -273,7 +273,7 @@ export default class Display {
         const lowCol = this.createElement('div', 'containerCol');
         const lowTitle = this.createElement('h4', 'title', 'Low');
         const lowValueHolder = this.createElement('div', 'valueHolder');
-        const lowValue = this.createElement('p', 'value', this.tempToggle === 0 ? forecast.days[0].tempmin : this.convertC(forecast.days[0].tempmin));
+        const lowValue = this.createElement('p', 'value', this.tempToggle === 0 ? Math.trunc(forecast.days[0].tempmin) : this.convertC(forecast.days[0].tempmin));
         const lowUnit = this.createElement('p', 'unit', this.tempToggle === 0 ? '°F' : '°C');
         lowValueHolder.appendChild(lowValue);
         lowValueHolder.appendChild(lowUnit);
@@ -354,6 +354,16 @@ export default class Display {
         containerWrap2.appendChild(cloudPrecipContainer);
         containerWrap2.appendChild(rainSnowContainer);
 
+        if (!forecast.days[0].precip > 0 && !forecast.days[0].snow > 0) {
+            rainSnowContainer.style.display = "none";
+        } else if (!forecast.days[0].precip > 0) {
+            rainIcon.style.display = "none";
+            rainCol.style.display = "none";
+        } else if (!forecast.days[0].snow > 0) {
+            snowIcon.style.display = "none";
+            snowCol.style.display = "none";
+        }
+
         // --- containerWrap: Humidity/Dew & Wind ---
         const containerWrap3 = this.createElement('div', 'containerWrap');
 
@@ -427,6 +437,10 @@ export default class Display {
 
         containerWrap3.appendChild(humidityContainer);
         containerWrap3.appendChild(windContainer);
+
+        if (!forecast.currentConditions.windgust > 0 || forecast.currentConditions.windgust < forecast.currentConditions.wind) {
+            gustCol.style.display = "none";
+        }
 
         // --- containerWrap: Visibility, UV, Sunrise, Sunset, Moon ---
         const containerWrap4 = this.createElement('div', 'containerWrap');
@@ -512,13 +526,124 @@ export default class Display {
         content.appendChild(sectionCurrent);
     }
 
+    redrawHourly() {
+        const content = document.querySelector(".content");
+
+        const sectionHourly = this.createElement('section', 'upcoming');
+        const header = this.createElement('h3', 'upcomingHeader', 'Hourly');
+        const forecastContainer = this.createElement('div', 'forecastContainer');
+
+        sectionHourly.appendChild(header);
+        sectionHourly.appendChild(forecastContainer);
+
+        const today = new Date();
+        let startHour = 0;
+        if (this.dayIndex === 0) {
+            startHour = today.getHours();
+        }
+
+        //loop start
+        for (let i = startHour; i < 24; i++) {
+            const forecastCard = this.createElement('div', 'forecastCard');
+
+            const col1 = this.createElement('div', 'containerCol');
+            const parsedHour = parse(forecast.days[this.dayIndex].hours[i].datetime, "HH:mm:ss", new Date());
+            const col1Title = this.createElement('h3', 'title', format(parsedHour, "H:mm"));
+            col1.appendChild(col1Title);
+
+            const col2 = this.createElement('div', 'containerCol');
+            const icon = this.createElement('div', 'upcomingIcon');
+            icon.classList.add(Weather.getConditionIcon(forecast.days[this.dayIndex].hours[i].icon));
+            const chance = this.createElement('p', 'value', `${forecast.days[this.dayIndex].hours[i].precipprob}%`);
+            col2.appendChild(icon);
+            col2.appendChild(chance);
+            if (!forecast.days[this.dayIndex].hours[i].precipprob > 0) {
+                chance.style.visibility = "hidden";
+            }
+
+            const col3 = this.createElement('div', 'containerCol');
+            const highHolder = this.createElement('div', 'valueHolder');
+            const highTemp = this.createElement('p', 'title', this.tempToggle === 0 ? Math.trunc(forecast.days[this.dayIndex].hours[i].temp) : this.convertC(forecast.days[this.dayIndex].hours[i].temp));
+            const highUnit = this.createElement('p', 'unit', this.tempToggle === 0 ? "°F" : "°C");
+            highHolder.appendChild(highTemp);
+            highHolder.appendChild(highUnit);
+
+            col3.appendChild(highHolder);
+
+            forecastCard.appendChild(col1);
+            forecastCard.appendChild(col2);
+            forecastCard.appendChild(col3);
+
+            forecastContainer.appendChild(forecastCard);
+        }
+        //loop end
+
+        content.appendChild(sectionHourly);
+    }
+
     redrawUpcoming() {
         const content = document.querySelector(".content");
+
         const sectionUpcoming = this.createElement('section', 'upcoming');
-        
+        const header = this.createElement('h3', 'upcomingHeader', 'Next Week');
+        const forecastContainer = this.createElement('div', 'forecastContainer');
 
+        sectionUpcoming.appendChild(header);
+        sectionUpcoming.appendChild(forecastContainer);
 
+        const today = new Date();
         
+        //loop start
+        for (let i = 1; i < 8; i++) {
+            const indexDate = addDays(today, i);
+            const forecastCard = this.createElement('div', 'forecastCard');
+
+            const col1 = this.createElement('button', 'containerCol');
+            col1.id = "dateBtn";
+            col1.addEventListener("click", () => {
+                this.dayIndex = i;
+                this.redrawFuture(i);
+            });
+
+            const col1Title = this.createElement('h3', 'title', format(indexDate, "EEE"));
+            const col1Date = this.createElement('p', 'title', format(indexDate, "L/d"));
+            col1.appendChild(col1Title);
+            col1.appendChild(col1Date);
+
+            const col2 = this.createElement('div', 'containerCol');
+            const icon = this.createElement('div', 'upcomingIcon');
+            icon.classList.add(Weather.getConditionIcon(forecast.days[i].icon));
+            const chance = this.createElement('p', 'value', `${forecast.days[i].precipprob}%`);
+            col2.appendChild(icon);
+            col2.appendChild(chance);
+            if (!forecast.days[i].precipprob > 0) {
+                chance.style.visibility = "hidden";
+            }
+
+            const col3 = this.createElement('div', 'containerCol');
+            const highHolder = this.createElement('div', 'valueHolder');
+            const highTemp = this.createElement('h3', 'title', this.tempToggle === 0 ? Math.trunc(forecast.days[i].tempmax) : this.convertC(forecast.days[i].tempmax));
+            const highUnit = this.createElement('h3', 'value', this.tempToggle === 0 ? "°F" : "°C");
+            highHolder.appendChild(highTemp);
+            highHolder.appendChild(highUnit);
+
+            const lowHolder = this.createElement('div', 'valueHolder');
+            const lowTemp = this.createElement('p', 'title', this.tempToggle === 0 ? Math.trunc(forecast.days[i].tempmin) : this.convertC(forecast.days[i].tempmin));
+            const lowUnit = this.createElement('p', 'unit', this.tempToggle === 0 ? "°F" : "°C");
+            lowHolder.appendChild(lowTemp);
+            lowHolder.appendChild(lowUnit);
+
+            col3.appendChild(highHolder);
+            col3.appendChild(lowHolder);
+
+            forecastCard.appendChild(col1);
+            forecastCard.appendChild(col2);
+            forecastCard.appendChild(col3);
+
+            forecastContainer.appendChild(forecastCard);
+        }
+        //loop end
+
         content.appendChild(sectionUpcoming);
     }
 
@@ -528,11 +653,19 @@ export default class Display {
         content.innerHTML = "";
 
         // future
-        const future = document.createElement("section");
-        future.classList.add("future");
+        const future = this.createElement("section", "future");
+        const backBtn = this.createElement("button", "container");
+        backBtn.id = "backBtn";
+        backBtn.textContent = "Back";
+        backBtn.addEventListener("click", () => {
+            this.dayIndex = 0;
+            this.redrawOverview();
+        });
 
 
+        content.appendChild(backBtn);
         content.appendChild(future);
+        this.redrawHourly();
     }
 }
 
