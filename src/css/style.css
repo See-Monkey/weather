@@ -49,7 +49,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 button {
-  background-color: var(--silver);
+  background-color: var(--white);
+    box-shadow: 2px 2px 4px var(--d-gray);
+}
+button:hover {
+  cursor: pointer;
+  box-shadow: 2px 2px 4px var(--silver);
 }
 
 body {
@@ -60,6 +65,10 @@ body {
   flex-direction: column;
   gap: 20px;
   align-items: center;
+  background-image: linear-gradient(var(--blue), var(--d-blue));
+}
+body.dark {
+  background-image: linear-gradient(var(--d-blue), var(--navy));
 }
 body.dark h1,
 body.dark h2,
@@ -79,6 +88,13 @@ header {
   justify-content: space-between;
   align-items: flex-end;
   padding: 10px 20px;
+  padding-bottom: 20px;
+  background-image: linear-gradient(var(--l-blue), var(--blue));
+  border-bottom: 2px solid var(--d-blue);
+}
+body.dark header {
+  background-image: linear-gradient(var(--d-blue), var(--blue));
+  border-bottom: 2px solid var(--l-blue);
 }
 
 .logo {
@@ -102,6 +118,7 @@ body.dark .logoImg {
 .logoText {
   height: 40px;
   font-size: 40px;
+  text-shadow: 2px 2px 4px var(--gray);
 }
 
 .settings {
@@ -204,6 +221,10 @@ nav {
   border-radius: 20px;
   flex: 1;
   padding: 0 20px;
+  background-color: var(--white);
+}
+body.dark #searchInput {
+  background-color: var(--silver);
 }
 
 #searchBtn {
@@ -244,9 +265,12 @@ nav {
 
 .loadingCard {
   text-align: center;
-  background-color: var(--gray);
+  background-color: var(--silver);
   border-radius: 20px;
   padding: 20px;
+}
+body.dark .loadingCard {
+  background-color: var(--d-gray);
 }
 
 /* ============ current ============ */
@@ -270,7 +294,19 @@ body.dark .alertIcon {
   gap: 10px;
   padding: 20px 0;
   border-radius: 20px;
-  background-color: var(--silver);
+  background-image: linear-gradient(var(--white), var(--silver));
+  border-right: 3px solid var(--blue);
+  border-bottom: 3px solid var(--blue);
+  border-left: 2px solid var(--silver);
+  border-top: 2px solid var(--silver);
+}
+body.dark .current {
+  background-image: linear-gradient(var(--black), var(--d-gray));
+  background-image: linear-gradient(var(--d-gray), var(--black));
+  border-right: 3px solid var(--l-blue);
+  border-bottom: 3px solid var(--l-blue);
+  border-left: 2px solid var(--gray);
+  border-top: 2px solid var(--gray);
 }
 
 .title {
@@ -678,7 +714,19 @@ body.dark .currentMoonIcon {
   gap: 10px;
   padding: 20px 10px;
   border-radius: 20px;
-  background-color: var(--silver);
+  background-image: linear-gradient(var(--white), var(--silver));
+  border-right: 3px solid var(--blue);
+  border-bottom: 3px solid var(--blue);
+  border-left: 2px solid var(--silver);
+  border-top: 2px solid var(--silver);
+  
+}
+body.dark .upcoming {
+  background-image: linear-gradient(var(--d-gray), var(--black));
+  border-right: 3px solid var(--l-blue);
+  border-bottom: 3px solid var(--l-blue);
+  border-left: 2px solid var(--gray);
+  border-top: 2px solid var(--gray);
 }
 
 .upcomingHeader {
@@ -700,11 +748,18 @@ body.dark .currentMoonIcon {
   gap: 10px;
   padding: 10px;
   border-radius: 8px;
-  background-color: var(--gray);
+  background-color: var(--l-blue);
+}
+body.dark .forecastCard {
+  background-color: var(--navy);
 }
 
 #dateBtn {
   cursor: pointer;
+}
+
+body.dark #dateBtn {
+  background-color: var(--d-gray);
 }
 
 .upcomingIcon {
@@ -728,7 +783,19 @@ body.dark .upcomingIcon {
   gap: 10px;
   padding: 20px 0;
   border-radius: 20px;
-  background-color: var(--silver);
+  background-image: linear-gradient(var(--white), var(--silver));
+  border-right: 3px solid var(--blue);
+  border-bottom: 3px solid var(--blue);
+  border-left: 2px solid var(--silver);
+  border-top: 2px solid var(--silver);
+}
+body.dark .future {
+  background-image: linear-gradient(var(--black), var(--d-gray));
+  background-image: linear-gradient(var(--d-gray), var(--black));
+  border-right: 3px solid var(--l-blue);
+  border-bottom: 3px solid var(--l-blue);
+  border-left: 2px solid var(--gray);
+  border-top: 2px solid var(--gray);
 }
 
 @media (max-width: 650px) {

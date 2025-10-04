@@ -685,7 +685,7 @@ export default class Display {
         const today = new Date();
         let startHour = 0;
         let nextDayHours = 0;
-        const nextDay = addDays(this.dayIndex, 1);
+        const nextDay = this.dayIndex + 1;
         if (this.dayIndex === 0) {
             startHour = today.getHours();
         }
