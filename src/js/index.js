@@ -34,3 +34,9 @@ form.addEventListener("keydown", (e) => {
         Display.search()
     }
 });
+
+// testing
+const today = new Date();
+let startHour = 0;
+startHour = today.getHours();
+console.log(startHour);

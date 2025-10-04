@@ -127,6 +127,7 @@ export default class Display {
         const nextWeek = addDays(today, 7);
 
         forecast = await Weather.fetchWeather(searchInput.value, format(today, "yyyy-MM-dd"), format(nextWeek, "yyyy-MM-dd"));
+        console.log(forecast);
         await this.delay(100);
         this.redrawOverview();
         searchInput.value = "";
@@ -255,15 +256,28 @@ export default class Display {
         currentDate.appendChild(currentDescription);
 
         const currentConditionIcon = this.createElement('div', 'currentConditionIcon');
-        currentConditionIcon.classList.add(Weather.getConditionIcon(forecast.currentConditions.icon))
+        if (forecast.currentConditions !== undefined) {
+            currentConditionIcon.classList.add(Weather.getConditionIcon(forecast.currentConditions.icon));
+        } else {
+            currentConditionIcon.classList.add(Weather.getConditionIcon(forecast.days[0].icon));
+        }
 
         const tempContainer = this.createElement('div', 'tempContainer');
         const tempIcon = this.createElement('div', 'tempIcon');
-        tempIcon.classList.add(Weather.getTempIcon(forecast.currentConditions.temp));
+        if (forecast.currentConditions !== undefined) {
+            tempIcon.classList.add(Weather.getTempIcon(forecast.currentConditions.temp));
+        } else {
+            tempIcon.classList.add(Weather.getTempIcon(forecast.days[0].hours[today.getHours()].temp));
+        }
 
         const currentTemp = this.createElement('div', 'currentTemp');
         const valueHolderMain = this.createElement('div', 'valueHolder');
-        const tempValue = this.createElement('h4', 'value currentTempValue', this.tempToggle === 0 ? Math.trunc(forecast.currentConditions.temp) : this.convertC(forecast.currentConditions.temp));
+        const tempValue = this.createElement('h4', 'value currentTempValue');
+        if (forecast.currentConditions !== undefined) {
+            tempValue.textContent = this.tempToggle === 0 ? Math.trunc(forecast.currentConditions.temp) : this.convertC(forecast.currentConditions.temp);
+        } else {
+            tempValue.textContent = this.tempToggle === 0 ? Math.trunc(forecast.days[0].temp) : this.convertC(forecast.days[0].temp);
+        }
         const tempUnit = this.createElement('p', 'unit', this.tempToggle === 0 ? '°F' : '°C');
         valueHolderMain.appendChild(tempValue);
         valueHolderMain.appendChild(tempUnit);
@@ -271,7 +285,12 @@ export default class Display {
         const feelCol = this.createElement('div', 'containerCol');
         const feelTitle = this.createElement('h4', 'title', 'Feel');
         const feelValueHolder = this.createElement('div', 'valueHolder');
-        const feelValue = this.createElement('p', 'value', this.tempToggle === 0 ? Math.trunc(forecast.currentConditions.feelslike) : this.convertC(forecast.currentConditions.feelslike));
+        const feelValue = this.createElement('p', 'value');
+        if (forecast.currentConditions !== undefined) {
+            feelValue.textContent = this.tempToggle === 0 ? Math.trunc(forecast.currentConditions.feelslike) : this.convertC(forecast.currentConditions.feelslike);
+        } else {
+            feelValue.textContent = this.tempToggle === 0 ? Math.trunc(forecast.days[0].feelslike) : this.convertC(forecast.days[0].feelslike);
+        }
         const feelUnit = this.createElement('p', 'unit', this.tempToggle === 0 ? '°F' : '°C');
         feelValueHolder.appendChild(feelValue);
         feelValueHolder.appendChild(feelUnit);
@@ -325,7 +344,12 @@ export default class Display {
         const cloudCol = this.createElement('div', 'containerCol');
         const cloudTitle = this.createElement('h4', 'title', 'Cloud');
         const cloudValueHolder = this.createElement('div', 'valueHolder');
-        const cloudValue = this.createElement('p', 'value', forecast.currentConditions.cloudcover);
+        const cloudValue = this.createElement('p', 'value');
+        if (forecast.currentConditions !== undefined) {
+            cloudValue.textContent = forecast.currentConditions.cloudcover;
+        } else {
+            cloudValue.textContent = forecast.days[0].hours[today.getHours()].cloudcover;
+        }
         const cloudUnit = this.createElement('p', 'unit', '%');
         cloudValueHolder.appendChild(cloudValue);
         cloudValueHolder.appendChild(cloudUnit);
@@ -399,7 +423,12 @@ export default class Display {
         const humidityCol = this.createElement('div', 'containerCol');
         const humidityTitle = this.createElement('h4', 'title', 'Humidity');
         const humidityValueHolder = this.createElement('div', 'valueHolder');
-        const humidityValue = this.createElement('p', 'value', forecast.currentConditions.humidity);
+        const humidityValue = this.createElement('p', 'value');
+        if (forecast.currentConditions !== undefined) {
+            humidityValue.textContent = forecast.currentConditions.humidity;
+        } else {
+            humidityValue.textContent = forecast.days[0].hours[today.getHours()].humidity;
+        }
         const humidityUnit = this.createElement('p', 'unit', '%');
         humidityValueHolder.appendChild(humidityValue);
         humidityValueHolder.appendChild(humidityUnit);
@@ -410,7 +439,12 @@ export default class Display {
         const dewCol = this.createElement('div', 'containerCol');
         const dewTitle = this.createElement('h4', 'title', 'Dew Point');
         const dewValueHolder = this.createElement('div', 'valueHolder');
-        const dewValue = this.createElement('p', 'value', this.tempToggle === 0 ? forecast.currentConditions.dew : this.convertC(forecast.currentConditions.dew));
+        const dewValue = this.createElement('p', 'value');
+        if (forecast.currentConditions !== undefined) {
+            dewValue.textContent = this.tempToggle === 0 ? forecast.currentConditions.dew : this.convertC(forecast.currentConditions.dew);
+        } else {
+            dewValue.textContent = this.tempToggle === 0 ? forecast.days[0].dew : this.convertC(forecast.days[0].dew);
+        }
         const dewUnit = this.createElement('p', 'unit', this.tempToggle === 0 ? '°F' : '°C');
         dewValueHolder.appendChild(dewValue);
         dewValueHolder.appendChild(dewUnit);
@@ -427,17 +461,33 @@ export default class Display {
         const windIcon = this.createElement('div', 'windIcon');
         const fromCol = this.createElement('div', 'containerCol');
         const fromTitle = this.createElement('h4', 'title', 'From');
-        const fromValue = this.createElement('p', 'value', Weather.getWindDir(forecast.currentConditions.winddir));
+        const fromValue = this.createElement('p', 'value');
+        if (forecast.currentConditions !== undefined) {
+            fromValue.textContent = Weather.getWindDir(forecast.currentConditions.winddir);
+        } else {
+            fromValue.textContent = Weather.getWindDir(forecast.days[0].hours[today.getHours()].winddir);
+        }
         fromCol.appendChild(fromTitle);
         fromCol.appendChild(fromValue);
 
         const windDirArrow = this.createElement('div', 'windDirArrow');
-        windDirArrow.classList.add(Weather.getWindDirIcon(Weather.getWindDir(forecast.currentConditions.winddir)));
+        if (forecast.currentConditions !== undefined) {
+            windDirArrow.classList.add(Weather.getWindDirIcon(Weather.getWindDir(forecast.currentConditions.winddir)));
+        } else {
+            windDirArrow.classList.add(Weather.getWindDirIcon(Weather.getWindDir(forecast.days[0].hours[today.getHours()].winddir)));
+
+        }
 
         const speedCol = this.createElement('div', 'containerCol');
         const speedTitle = this.createElement('h4', 'title', 'Speed');
         const speedValueHolder = this.createElement('div', 'valueHolder');
-        const speedValue = this.createElement('p', 'value', this.speedToggle === 0 ? forecast.currentConditions.windspeed : this.convertKm(forecast.currentConditions.windspeed));
+        const speedValue = this.createElement('p', 'value');
+        if (forecast.currentConditions !== undefined) {
+            speedValue.textContent = this.speedToggle === 0 ? forecast.currentConditions.windspeed : this.convertKm(forecast.currentConditions.windspeed);
+        } else {
+            speedValue.textContent = this.speedToggle === 0 ? forecast.days[0].hours[today.getHours()].windspeed : this.convertKm(forecast.days[0].hours[today.getHours()].windspeed);
+
+        }
         const speedUnit = this.createElement('p', 'unit', this.speedToggle === 0 ? "mph": "km/h");
         speedValueHolder.appendChild(speedValue);
         speedValueHolder.appendChild(speedUnit);
@@ -447,7 +497,12 @@ export default class Display {
         const gustCol = this.createElement('div', 'containerCol');
         const gustTitle = this.createElement('h4', 'title', 'Gust');
         const gustValueHolder = this.createElement('div', 'valueHolder');
-        const gustValue = this.createElement('p', 'value', this.speedToggle === 0 ? forecast.currentConditions.windgust : this.convertKm(forecast.currentConditions.windgust));
+        const gustValue = this.createElement('p', 'value');
+        if (forecast.currentConditions !== undefined) {
+            gustValue.textContent = this.speedToggle === 0 ? forecast.currentConditions.windgust : this.convertKm(forecast.currentConditions.windgust);
+        } else {
+            gustValue.textContent = this.speedToggle === 0 ? forecast.days[0].hours[today.getHours()].windgust : this.convertKm(forecast.days[0].hours[today.getHours()].windgust);
+        }
         const gustUnit = this.createElement('p', 'unit', this.speedToggle === 0 ? "mph": "km/h");
         gustValueHolder.appendChild(gustValue);
         gustValueHolder.appendChild(gustUnit);
@@ -463,9 +518,14 @@ export default class Display {
         containerWrap3.appendChild(humidityContainer);
         containerWrap3.appendChild(windContainer);
 
-        if (!forecast.currentConditions.windgust > 0 || forecast.currentConditions.windgust < forecast.currentConditions.wind) {
-            gustCol.style.display = "none";
-        }
+        if (forecast.currentConditions !== undefined) {
+            if (!forecast.currentConditions.windgust > 0 || forecast.currentConditions.windgust < forecast.currentConditions.wind) {
+                gustCol.style.display = "none";
+            }
+        } else {
+            if (!forecast.days[0].hours[today.getHours()].windgust > 0 || forecast.days[0].hours[today.getHours()].windgust < forecast.days[0].hours[today.getHours()].wind) {
+                gustCol.style.display = "none";
+        }}
 
         // --- containerWrap: Visibility, UV, Sunrise, Sunset, Moon ---
         const containerWrap4 = this.createElement('div', 'containerWrap');
@@ -477,7 +537,12 @@ export default class Display {
         const visibilityCol = this.createElement('div', 'containerCol');
         const visibilityTitle = this.createElement('h4', 'title', 'Visibility');
         const visibilityValueHolder = this.createElement('div', 'valueHolder');
-        const visibilityValue = this.createElement('p', 'value', this.speedToggle === 0 ? forecast.currentConditions.visibility : this.convertKm(forecast.currentConditions.visibility));
+        const visibilityValue = this.createElement('p', 'value');
+        if (forecast.currentConditions !== undefined) {
+            visibilityValue.textContent = this.speedToggle === 0 ? forecast.currentConditions.visibility : this.convertKm(forecast.currentConditions.visibility);
+        } else {
+            visibilityValue.textContent = this.speedToggle === 0 ? forecast.days[0].hours[today.getHours()].visibility : this.convertKm(forecast.days[0].hours[today.getHours()].visibility);
+        }
         const visibilityUnit = this.createElement('p', 'unit', this.speedToggle === 0 ? "mi": "km");
         visibilityValueHolder.appendChild(visibilityValue);
         visibilityValueHolder.appendChild(visibilityUnit);
@@ -506,7 +571,7 @@ export default class Display {
         const sunriseCol = this.createElement('div', 'containerCol');
         const sunriseTitle = this.createElement('h4', 'title', 'Sunrise');
         const parsedSunrise = parse(forecast.days[0].sunrise, "HH:mm:ss", new Date());
-        const sunriseValue = this.createElement('p', 'value', format(parsedSunrise, "H:mm"));
+        const sunriseValue = this.createElement('p', 'value', format(parsedSunrise, "h:mm aaa"));
         sunriseCol.appendChild(sunriseTitle);
         sunriseCol.appendChild(sunriseValue);
 
@@ -514,7 +579,7 @@ export default class Display {
         const sunsetCol = this.createElement('div', 'containerCol');
         const sunsetTitle = this.createElement('h4', 'title', 'Sunset');
         const parsedSunset = parse(forecast.days[0].sunset, "HH:mm:ss", new Date());
-        const sunsetValue = this.createElement('p', 'value', format(parsedSunset, "H:mm"));
+        const sunsetValue = this.createElement('p', 'value', format(parsedSunset, "h:mm aaa"));
         sunsetCol.appendChild(sunsetTitle);
         sunsetCol.appendChild(sunsetValue);
 
@@ -526,10 +591,19 @@ export default class Display {
         // Moon
         const moonContainer = this.createElement('div', 'container');
         const moonIcon = this.createElement('div', 'currentMoonIcon');
-        moonIcon.classList.add(Weather.getMoonIcon(Weather.getMoonPhase(forecast.currentConditions.moonphase)));
+        if (forecast.currentConditions !== undefined) {
+            moonIcon.classList.add(Weather.getMoonIcon(Weather.getMoonPhase(forecast.currentConditions.moonphase)));
+        } else {
+            moonIcon.classList.add(Weather.getMoonIcon(Weather.getMoonPhase(forecast.days[0].moonphase)));
+        }
         const moonCol = this.createElement('div', 'containerCol');
         const moonTitle = this.createElement('h4', 'title', 'Moon Phase');
-        const moonValue = this.createElement('p', 'value', Weather.getMoonPhase(forecast.currentConditions.moonphase));
+        const moonValue = this.createElement('p', 'value');
+        if (forecast.currentConditions !== undefined) {
+            moonValue.textContent = Weather.getMoonPhase(forecast.currentConditions.moonphase);
+        } else {
+            moonValue.textContent = Weather.getMoonPhase(forecast.days[0].moonphase);
+        }
         moonCol.appendChild(moonTitle);
         moonCol.appendChild(moonValue);
 
@@ -563,17 +637,22 @@ export default class Display {
 
         const today = new Date();
         let startHour = 0;
+        let nextDayHours = 0;
+        const nextDay = addDays(this.dayIndex, 1);
         if (this.dayIndex === 0) {
             startHour = today.getHours();
         }
+        if (startHour >= 13) {
+            nextDayHours = startHour - 12;
+        }
 
-        //loop start
+        //loop remaining hours in current day, or all 24 hours if future day
         for (let i = startHour; i < 24; i++) {
             const forecastCard = this.createElement('div', 'forecastCard');
 
             const col1 = this.createElement('div', 'containerCol');
             const parsedHour = parse(forecast.days[this.dayIndex].hours[i].datetime, "HH:mm:ss", new Date());
-            const col1Title = this.createElement('h3', 'title', format(parsedHour, "H:mm"));
+            const col1Title = this.createElement('h3', 'title', format(parsedHour, "h aaa"));
             col1.appendChild(col1Title);
 
             const col2 = this.createElement('div', 'containerCol');
@@ -600,8 +679,42 @@ export default class Display {
             forecastCard.appendChild(col3);
 
             forecastContainer.appendChild(forecastCard);
-        }
-        //loop end
+        } //loop end
+
+        //loop for hours from next day to make a total of at least 12 hour cards
+        for (let i = 0; i < nextDayHours; i++) {
+            const forecastCard = this.createElement('div', 'forecastCard');
+
+            const col1 = this.createElement('div', 'containerCol');
+            const parsedHour = parse(forecast.days[nextDay].hours[i].datetime, "HH:mm:ss", new Date());
+            const col1Title = this.createElement('h3', 'title', format(parsedHour, "h aaa"));
+            col1.appendChild(col1Title);
+
+            const col2 = this.createElement('div', 'containerCol');
+            const icon = this.createElement('div', 'upcomingIcon');
+            icon.classList.add(Weather.getConditionIcon(forecast.days[nextDay].hours[i].icon));
+            const chance = this.createElement('p', 'value', `${forecast.days[nextDay].hours[i].precipprob}%`);
+            col2.appendChild(icon);
+            col2.appendChild(chance);
+            if (!forecast.days[nextDay].hours[i].precipprob > 0) {
+                chance.style.visibility = "hidden";
+            }
+
+            const col3 = this.createElement('div', 'containerCol');
+            const highHolder = this.createElement('div', 'valueHolder');
+            const highTemp = this.createElement('p', 'title', this.tempToggle === 0 ? Math.trunc(forecast.days[nextDay].hours[i].temp) : this.convertC(forecast.days[nextDay].hours[i].temp));
+            const highUnit = this.createElement('p', 'unit', this.tempToggle === 0 ? "°F" : "°C");
+            highHolder.appendChild(highTemp);
+            highHolder.appendChild(highUnit);
+
+            col3.appendChild(highHolder);
+
+            forecastCard.appendChild(col1);
+            forecastCard.appendChild(col2);
+            forecastCard.appendChild(col3);
+
+            forecastContainer.appendChild(forecastCard);
+        } //loop end
 
         content.appendChild(sectionHourly);
     }
