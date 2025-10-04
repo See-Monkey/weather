@@ -1,6 +1,6 @@
 export default class Weather {
     constructor() {
-        this.key = "HKRBNZLRBQGFV45CMGN3Z9FZS";
+        this.key = "XKRBNZLRBQGFV45CMGN3Z9FZX";
     }
 
     async fetchWeather(searchLocation, start, end) {

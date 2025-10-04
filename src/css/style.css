@@ -48,6 +48,10 @@ h1, h2, h3, h4, h5, h6 {
   --navy: #1e2749;
 }
 
+button {
+  background-color: var(--silver);
+}
+
 body {
   width: 100%;
   overflow-x: hidden;
@@ -56,6 +60,16 @@ body {
   flex-direction: column;
   gap: 20px;
   align-items: center;
+}
+body.dark h1,
+body.dark h2,
+body.dark h3,
+body.dark h4,
+body.dark p {
+  color: var(--white);
+}
+body.dark button {
+  background-color: var(--gray);
 }
 
 /* ============ header ============ */
@@ -79,7 +93,10 @@ header {
   background-position: center;
   background-repeat: no-repeat;
   background-size: 50px 50px;
-  filter: drop-shadow(2px 2px 4px gray);
+  filter: drop-shadow(2px 2px 4px var(--d-gray));
+}
+body.dark .logoImg {
+  filter: invert(98%);
 }
 
 .logoText {
@@ -152,6 +169,9 @@ header {
   background-repeat: no-repeat;
   background-size: 22px 22px;
 }
+body.dark .lightMode {
+  filter: invert(98%);
+}
 
 .darkMode {
   height: 25px;
@@ -160,6 +180,9 @@ header {
   background-position: center;
   background-repeat: no-repeat;
   background-size: 22px 22px;
+}
+body.dark .darkMode {
+  filter: invert(98%);
 }
 
 /* ============ nav ============ */
@@ -221,7 +244,7 @@ nav {
 
 .loadingCard {
   text-align: center;
-  background-color: gray;
+  background-color: var(--gray);
   border-radius: 20px;
   padding: 20px;
 }
@@ -234,6 +257,9 @@ nav {
   background-repeat: no-repeat;
   background-size: 80px 80px;
 }
+body.dark .alertIcon {
+  filter: invert(98%);
+}
 
 .current {
   width: min(100%, 900px);
@@ -244,7 +270,7 @@ nav {
   gap: 10px;
   padding: 20px 0;
   border-radius: 20px;
-  background-color: silver;
+  background-color: var(--silver);
 }
 
 .title {
@@ -306,7 +332,7 @@ nav {
   flex-wrap: wrap;
   margin: 0 10px;
   padding-bottom: 20px;
-  border-bottom: 2px solid gray;
+  border-bottom: 2px solid var(--gray);
   margin-bottom: 10px;
 }
 
@@ -335,6 +361,9 @@ nav {
   background-repeat: no-repeat;
   background-size: 30px 30px;
 }
+body.dark .latLonIcon{
+  filter: invert(98%);
+}
 
 .currentDate {
   display: flex;
@@ -359,6 +388,9 @@ nav {
   background-position: center;
   background-repeat: no-repeat;
   background-size: 120px 120px;
+}
+body.dark .currentConditionIcon {
+  filter: invert(98%);
 }
 .weather-snowy {
   background-image: url("../img/weather-snowy.svg");
@@ -418,6 +450,9 @@ nav {
   background-repeat: no-repeat;
   background-size: 40px 40px;
 }
+body.dark .tempIcon {
+  filter: invert(98%);
+}
 .thermometer-low {
   background-image: url("../img/thermometer-low.svg");
 }
@@ -428,6 +463,18 @@ nav {
   background-image: url("../img/thermometer-high.svg");
 }
 
+.cloudCoverIcon {
+  height: 35px;
+  width: 35px;
+  background-image: url("../img/weather-cloudy.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 30px 30px;
+}
+body.dark .cloudCoverIcon {
+  filter: invert(98%);
+}
+
 .precipIcon {
   height: 35px;
   width: 35px;
@@ -435,6 +482,9 @@ nav {
   background-position: center;
   background-repeat: no-repeat;
   background-size: 30px 30px;
+}
+body.dark .precipIcon {
+  filter: invert(98%);
 }
 
 .precipRainIcon {
@@ -445,6 +495,9 @@ nav {
   background-repeat: no-repeat;
   background-size: 30px 30px;
 }
+body.dark .precipRainIcon {
+  filter: invert(98%);
+}
 
 .precipSnowIcon {
   height: 35px;
@@ -454,14 +507,8 @@ nav {
   background-repeat: no-repeat;
   background-size: 30px 30px;
 }
-
-.cloudCoverIcon {
-  height: 35px;
-  width: 35px;
-  background-image: url("../img/weather-cloudy.svg");
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 30px 30px;
+body.dark .precipSnowIcon {
+  filter: invert(98%);
 }
 
 .humidityIcon {
@@ -472,6 +519,9 @@ nav {
   background-repeat: no-repeat;
   background-size: 30px 30px;
 }
+body.dark .humidityIcon {
+  filter: invert(98%);
+}
 
 .dewIcon {
   height: 35px;
@@ -480,6 +530,9 @@ nav {
   background-position: center;
   background-repeat: no-repeat;
   background-size: 30px 30px;
+}
+body.dark .dewIcon {
+  filter: invert(98%);
 }
 
 .visibilityIcon {
@@ -490,6 +543,9 @@ nav {
   background-repeat: no-repeat;
   background-size: 30px 30px;
 }
+body.dark .visibilityIcon {
+  filter: invert(98%);
+}
 
 .UVindexIcon {
   height: 35px;
@@ -498,6 +554,9 @@ nav {
   background-position: center;
   background-repeat: no-repeat;
   background-size: 30px 30px;
+}
+body.dark .UVindexIcon {
+  filter: invert(98%);
 }
 
 .windIcon {
@@ -508,6 +567,9 @@ nav {
   background-repeat: no-repeat;
   background-size: 30px 30px;
 }
+body.dark .windIcon {
+  filter: invert(98%);
+}
 
 .windDirArrow {
   height: 30px;
@@ -515,6 +577,9 @@ nav {
   background-position: center;
   background-repeat: no-repeat;
   background-size: 30px 30px;
+}
+body.dark .windDirArrow {
+  filter: invert(98%);
 }
 .arrow-down {
   background-image: url("../img/arrow-down-thin.svg");
@@ -549,6 +614,9 @@ nav {
   background-repeat: no-repeat;
   background-size: 30px 30px;
 }
+body.dark .sunriseIcon {
+  filter: invert(98%);
+}
 
 .sunsetIcon {
   height: 35px;
@@ -558,6 +626,9 @@ nav {
   background-repeat: no-repeat;
   background-size: 30px 30px;
 }
+body.dark .sunsetIcon {
+  filter: invert(98%);
+}
 
 .currentMoonIcon {
   height: 35px;
@@ -565,6 +636,9 @@ nav {
   background-position: center;
   background-repeat: no-repeat;
   background-size: 30px 30px;
+}
+body.dark .currentMoonIcon {
+  filter: invert(98%);
 }
 .moon-new {
   background-image: url("../img/moon-new.svg");
@@ -604,12 +678,12 @@ nav {
   gap: 10px;
   padding: 20px 10px;
   border-radius: 20px;
-  background-color: silver;
+  background-color: var(--silver);
 }
 
 .upcomingHeader {
   padding: 10px;
-  border-bottom: 2px solid gray;
+  border-bottom: 2px solid var(--gray);
 }
 
 .forecastContainer {
@@ -626,7 +700,7 @@ nav {
   gap: 10px;
   padding: 10px;
   border-radius: 8px;
-  background-color: gray;
+  background-color: var(--gray);
 }
 
 #dateBtn {
@@ -636,10 +710,12 @@ nav {
 .upcomingIcon {
   height: 35px;
   width: 35px;
-  /* background-image: url("../img/weather-cloudy.svg"); */
   background-position: center;
   background-repeat: no-repeat;
   background-size: 30px 30px;
+}
+body.dark .upcomingIcon {
+  filter: invert(98%);
 }
 
 /* ============ future ============ */
@@ -652,7 +728,7 @@ nav {
   gap: 10px;
   padding: 20px 0;
   border-radius: 20px;
-  background-color: silver;
+  background-color: var(--silver);
 }
 
 @media (max-width: 650px) {

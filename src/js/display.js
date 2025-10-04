@@ -89,6 +89,7 @@ export default class Display {
         } else {
             this.modeLight();
         }
+        this.refresh();
     }
 
     modeLight() {
@@ -96,6 +97,9 @@ export default class Display {
         settingModeBtn.classList.remove("active");
 
         this.modeToggle = 0;
+
+        const body = document.querySelector("body");
+        body.classList.remove("dark");
     }
 
     modeDark() {
@@ -103,6 +107,9 @@ export default class Display {
         settingModeBtn.classList.add("active");
 
         this.modeToggle = 1;
+
+        const body = document.querySelector("body");
+        body.classList.add("dark");
     }
 
     convertC(input) {
@@ -195,7 +202,7 @@ export default class Display {
         } else if (this.displayType === "overview") {
             this.redrawOverview();
         } else if (this.displayType === "future") {
-            this.redrawFuture();
+            this.redrawFuture(this.dayIndex);
         }
     }
 
@@ -763,7 +770,7 @@ export default class Display {
         const content = document.querySelector(".content");
 
         const sectionUpcoming = this.createElement('section', 'upcoming');
-        const header = this.createElement('h3', 'upcomingHeader', 'Next Week');
+        const header = this.createElement('h3', 'upcomingHeader', 'Next 7 Days');
         const forecastContainer = this.createElement('div', 'forecastContainer');
 
         sectionUpcoming.appendChild(header);
@@ -1158,9 +1165,18 @@ export default class Display {
         sectionFuture.appendChild(containerWrap3);
         sectionFuture.appendChild(containerWrap4);
 
+        const backBtn2 = this.createElement("button", "container");
+        backBtn2.id = "backBtn";
+        backBtn2.textContent = "Back";
+        backBtn2.addEventListener("click", () => {
+            this.dayIndex = 0;
+            this.redrawOverview();
+        });
+
         content.appendChild(backBtn);
         content.appendChild(sectionFuture);
         this.redrawHourly();
+        content.appendChild(backBtn2);
     }
 }
 
