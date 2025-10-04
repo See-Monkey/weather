@@ -128,9 +128,41 @@ export default class Display {
 
         forecast = await Weather.fetchWeather(searchInput.value, format(today, "yyyy-MM-dd"), format(nextWeek, "yyyy-MM-dd"));
         console.log(forecast);
-        await this.delay(100);
+        await this.delay(1000);
         this.redrawOverview();
         searchInput.value = "";
+    }
+
+    async geolocate(position) {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+        console.log(latitude);
+        console.log(longitude);
+        this.loading(`${latitude}, ${longitude}`);
+        const today = new Date();
+        const nextWeek = addDays(today, 7);
+
+        forecast = await Weather.fetchWeather(`${parseFloat(latitude.toFixed(4))},${parseFloat(longitude.toFixed(4))}`, format(today, "yyyy-MM-dd"), format(nextWeek, "yyyy-MM-dd"));
+        console.log(forecast);
+        await this.delay(100);
+        this.redrawOverview();
+    }
+
+    geoError(error) {
+        switch(error.code) {
+            case error.PERMISSION_DENIED:
+                alert("User denied the request for Geolocation.");
+                break;
+            case error.POSITION_UNAVAILABLE:
+                alert("Location information is unavailable.");
+                break;
+            case error.TIMEOUT:
+                alert("The request to get user location timed out.");
+                break;
+            case error.UNKNOWN_ERROR:
+                alert("An unknown error occurred.");
+                break;
+        }
     }
 
     delay(ms) {
@@ -165,6 +197,10 @@ export default class Display {
         } else if (this.displayType === "future") {
             this.redrawFuture();
         }
+    }
+
+    containsNoLetters(str) {
+        return !/[a-zA-z]/.test(str);
     }
 
     createElement(tag, className, textContent) {
@@ -222,6 +258,10 @@ export default class Display {
 
         currentHeaderMain.appendChild(h2);
         currentHeaderMain.appendChild(h4Desc);
+
+        if (this.containsNoLetters(h2.textContent)) {
+            h2.style.display = "none";
+        }
 
         const headerContainer = this.createElement('div', 'container');
         const latLonIcon = this.createElement('div', 'latLonIcon');
@@ -808,6 +848,10 @@ export default class Display {
 
         currentHeaderMain.appendChild(h2);
         currentHeaderMain.appendChild(h4Desc);
+
+        if (this.containsNoLetters(h2.textContent)) {
+            h2.style.display = "none";
+        }
 
         const headerContainer = this.createElement('div', 'container');
         const latLonIcon = this.createElement('div', 'latLonIcon');

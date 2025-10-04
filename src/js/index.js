@@ -24,6 +24,12 @@ document.addEventListener("click", (e) => {
         case "searchBtn":
             Display.search()
             break;
+        case "locationBtn":
+            if ("geolocation" in navigator) {
+                navigator.geolocation.getCurrentPosition(Display.geolocate.bind(Display), Display.geoError.bind(Display));
+            } else {
+                alert("Geolocation is not supported by this browser");
+            }
     }
 });
 
@@ -34,9 +40,3 @@ form.addEventListener("keydown", (e) => {
         Display.search()
     }
 });
-
-// testing
-const today = new Date();
-let startHour = 0;
-startHour = today.getHours();
-console.log(startHour);
