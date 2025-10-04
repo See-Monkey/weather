@@ -227,6 +227,8 @@ export default class Display {
         this.redrawCurrent();
         this.redrawHourly();
         this.redrawUpcoming();
+        
+        window.scrollTo(0,0);
     }
 
     redrawAlerts() {
@@ -1177,6 +1179,8 @@ export default class Display {
         content.appendChild(sectionFuture);
         this.redrawHourly();
         content.appendChild(backBtn2);
+
+        window.scrollTo(0,0);
     }
 }
 
