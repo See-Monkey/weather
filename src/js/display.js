@@ -134,8 +134,7 @@ export default class Display {
         const nextWeek = addDays(today, 7);
 
         forecast = await Weather.fetchWeather(searchInput.value, format(today, "yyyy-MM-dd"), format(nextWeek, "yyyy-MM-dd"));
-        console.log(forecast);
-        await this.delay(1000);
+        await this.delay(500);
         this.redrawOverview();
         searchInput.value = "";
     }
@@ -143,14 +142,11 @@ export default class Display {
     async geolocate(position) {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
-        console.log(latitude);
-        console.log(longitude);
         this.loading(`${latitude}, ${longitude}`);
         const today = new Date();
         const nextWeek = addDays(today, 7);
 
         forecast = await Weather.fetchWeather(`${parseFloat(latitude.toFixed(4))},${parseFloat(longitude.toFixed(4))}`, format(today, "yyyy-MM-dd"), format(nextWeek, "yyyy-MM-dd"));
-        console.log(forecast);
         await this.delay(100);
         this.redrawOverview();
     }
@@ -1183,10 +1179,4 @@ export default class Display {
         window.scrollTo(0,0);
     }
 }
-
-// =============== testing =============== //
-const today = new Date();
-const nextWeek = addDays(today, 7);
-forecast = Weather.fetchWeather("Chesapeake Bay, VA", format(today, "yyyy-MM-dd"), format(nextWeek, "yyyy-MM-dd"));
-console.log(forecast);
 
