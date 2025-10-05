@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blue Skies</title>
+<script defer src="main.js"></script></head>
+<body>
+    <header>
+        <div class="mobileHeader">
+            <div class="logo">
+                <div class="logoImg"></div>
+                <h1 class="logoText">Blue Skies</h1>
+            </div>
+            <div class="gearIcon">
+                <button id="settingsBtn" type="button"></button>
+            </div>
+        </div>
+        <div class="settings disabled"> 
+            <div class="setting">
+                <div class="settingText">
+                    <p>&deg;F</p>
+                    <p>&deg;C</p>
+                </div>
+                <button id="settingTempBtn" class="settingToggle" type="button"></button>
+            </div>
+            <div class="setting">
+                <div class="settingText">
+                    <p>mi</p>
+                    <p>km</p>
+                </div>
+                <button id="settingSpeedBtn" class="settingToggle" type="button"></button>
+            </div>
+            <div class="setting">
+                <div class="settingText mode">
+                    <div class="lightMode"></div>
+                    <div class="darkMode"></div>
+                </div>
+                <button id="settingModeBtn" class="settingToggle" type="button"></button>
+            </div>
+        </div>
+    </header>
+    <nav>
+        <form class="searchForm" action="#" method="post">
+            <input id="searchInput" type="text">
+            <button id="searchBtn" type="button"></button>
+            <button id="locationBtn" type="button"></button>
+        </form>
+    </nav>
+    <div class="content">
+    </div>
+</body>
+</html>
